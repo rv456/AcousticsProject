@@ -1,0 +1,85 @@
+* C:\From Compaq\My Documents\Hobby\Speakers\Designs\SpeakerSPICEModels\PortedBox.asc
+Vin N001 0 AC 2.828 0
+Re_ P001 In {Re}
+Le_ N002 P001 {Le}
+V_Isensor N004 0 AC 0
+H§BLu N003 N004 V_uSensor {Bl}
+H§Bli N007 0 V_ISensor {BL}
+L§Mmd_ N008 N007 {Mmd}
+Rms_ N010 N008 {Rms}
+Cms_ N012 N010 {Cms}
+E§SdPd N012 N013 Pf Pb {Sd}
+V_uSensor N013 0 AC 0
+F§Sdu Pb Pf V_uSensor {Sd}
+Ra1_ Pf N017 {Ra1}
+Ra2_ N017 N018 {Ra2}
+Ca1_ Pf N017 {Ca1}
+L§Ma1_ Pf N019 {Ma1}
+Lep_ N003 N002 {Lep}
+Rep_ N002 N003 {Rep}
+Rsource N001 In 0.1
+V_WVUSensor N018 0 AC 0
+B§AcousticOutput 0 0 I=9390.14*I(V_VUSensor) laplace=s
+B§Cone_Excursion_mm 0 0 I=2.828*1000*I(V_uSensor) laplace=1/s
+L§Mab_ Pb N014 {Mab}
+Cab_ N016 N014 {Cab}
+RairLeak_ N014 N015 {RairLeak}
+V_WNearVUSensor N019 N018 AC 0
+V_VUSensor 0 N016 AC 0
+V_PVUSensor N011 0 AC 0
+V_PNearVUSensor N006 N011 AC 0
+L§Map_ N014 N005 {Map}
+Ca1P_ N005 N009 {Ca1P}
+L§Ma1P_ N005 N006 {Ma1P}
+Ra1P_ N005 N009 {Ra1P}
+Ra2P_ N009 N011 {Ra2P}
+B§PortOutput 0 0 I=9390.14*I(V_PVUSensor) laplace=s
+B§WooferOutput 0 0 I=9390.14*I(V_WVUSensor) laplace=s
+F§kpUw N006 N005 V_WNearVUSensor {3*pi*RadP/(16*DistW_P)}
+F§kwUp N019 Pf V_PNearVUSensor {3*pi*Rad/(16*DistW_P)}
+B§LeakOutput 0 0 I=9390.14*I(V_VULeak) laplace=s
+V_VULeak N015 0 AC 0
+.ac oct 40 10 2000
+.param Bl={sqrt(Re*sqrt(Mms/Cms)/Qe)}
+.param Mms=17.7e-3
+.param Mmd={Mms-(16*Sd*Sd*1.18/(3*rad*pi*pi))}
+.param Sd=134e-4
+.param rad={sqrt(Sd/pi)}
+.param Fs=52.3
+.param Rms={sqrt(Mms/Cms)/Qms}
+.param Cms={1/(pow(Fs*2*pi,2)*Mms)}
+.param Qms=2.79
+.param Qe=0.5
+.param Re=5.8
+.param Le=0.2m
+.param Lep=0.1m
+.param Rep=5
+.param Ma1={8*1.18/(3*pi*pi*rad)}
+.param Ra1={0.441*1.18*345/Sd}
+.param Ra2={1.18*345/Sd}
+.param Ca1={5.94*pow(rad,3)/(1.18*345*345)}
+* Calculated parameters:
+* Edit the values of the following driver parameters:\n(Le, Lep and Rep are optional)
+* Outputs to be plotted:\n(Vc impedance is V(in)/I(Re_)\nand group delay is plotted\nat AcousticOutput's plot
+* Edit the box parameters (m3):
+.param Vb=14e-3
+.param Cab={Vb/(1.18*345*345)}
+.param RairLeak={QL/(2*pi*Fb*Cab)}
+.param Ma1p={8*1.18/(3*pi*pi*RadP)}
+.param Map={(1/(pow(2*pi*Fb,2)*Cab))-Ma1p}
+.param Ra2P={1.18*345/(pi*RadP*RadP)}
+.param Ra1P={0.441*1.18*345/(pi*RadP*RadP)}
+.param Ca1P={5.94*pow(RadP,3)/(1.18*345*345)}
+.param Ql=7
+.param RadP=2.5e-2
+.param Vas={1.18*pow(345*Sd,2)*Cms}
+.param Mab=0.65*2.0/(pi*rad)
+* Use following step to try step changing box params:\n.step param Vb 10e-3 20e-3 4e-3
+* For Mab, use 0.65*2...  to account for some filling used:
+.measure PortLengthINcms Param pow(10, 5*(((Map*pi*radp*radp/1.18)-(0.6132*sqrt(radp*radp)))))
+.param Fb=50
+.param DistW_P=0.5
+* Distance between port and woofer opening, for mutual radiation.\nMake it very high for ignoring this: (as everything else in meters):
+* Printed Values at Output Log:
+.backanno
+.end

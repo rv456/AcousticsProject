@@ -1,0 +1,19 @@
+* Z:\home\harvey\Documents\UNI\5th_year\Acoustics\Project\Simulation\Initial\Draft1.asc
+R1 N003 N002 0.8
+L1 N002 N001 2.2m
+C1 N007 N001 6.8µ
+L2 N007 N009 0.47m
+R2 N009 0 0.32
+R3 N006 N007 0.18
+L3 N004 N006 0.2m
+C2 N004 0 22µ
+L4 0 N008 0.22m
+R4 N008 N010 0.18
+C3 N007 N010 22µ
+R5 N005 N004 0.32
+R6 N005 N010 8
+V1 N001 0 AC 1
+R7 N003 0 8
+.ac dec 100 10 30000
+.backanno
+.end

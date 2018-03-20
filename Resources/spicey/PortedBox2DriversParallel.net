@@ -1,0 +1,134 @@
+* C:\From Compaq\My Documents\Hobby\Speakers\Designs\SpeakerSPICEModels\PortedBox2DriversParallel.asc
+Vin N001 0 AC 2.828 0
+Re_2 N005 In {Re2}
+Le_2 N007 N005 {Le2}
+V_Isensor1 N011 0 AC 0
+H§BLu1 N008 N011 V_uSensor1 {Bl1}
+H§Bli1 N017 0 V_ISensor1 {BL1}
+L§Mmd_1 N019 N017 {Mmd1}
+Rms_1 N025 N019 {Rms1}
+Cms_1 N027 N025 {Cms1}
+E§SdPd1 N027 N028 Pf1 Pb1 {Sd1}
+V_uSensor1 N028 0 AC 0
+F§Sdu1 Pb1 Pf1 V_uSensor1 {Sd1}
+Ra1_1 Pf1 N021 {Ra11}
+Ra2_1 N021 N022 {Ra21}
+Ca1_1 Pf1 N021 {Ca11}
+L§Ma1_1 Pf1 N031 {Ma11}
+Lep_2 N009 N007 {Lep2}
+Rep_2 N007 N009 {Rep2}
+Rsource N001 In 0.1
+V_WVUSensor1 N022 0 AC 0
+B§AcousticOutput 0 0 I=9390.14*I(V_VUSensor) laplace=s
+B§Cone1_Excursion_mm 0 0 I=2.828*1000*I(V_uSensor1) laplace=1/s
+L§Mab_1 Pb1 N014 {Mab1}
+Cab_ N016 N014 {Cab}
+RairLeak_ N014 N015 {RairLeak}
+V_WNearVUSensor1 N031 N022 AC 0
+V_VUSensor 0 N016 AC 0
+V_PVUSensor N013 0 AC 0
+V_PNearVUSensor N003 N013 AC 0
+L§Map_ N014 N002 {Map}
+Ca1P_ N002 N010 {Ca1P}
+L§Ma1P_ N002 N003 {Ma1P}
+Ra1P_ N002 N010 {Ra1P}
+Ra2P_ N010 N013 {Ra2P}
+B§PortOutput 0 0 I=9390.14*I(V_PVUSensor) laplace=s
+B§Woofer1Output 0 0 I=9390.14*I(V_WVUSensor1) laplace=s
+F§kpUw1 N003 N002 V_WNearVUSensor1 {3*pi*RadP/(16*DistW1_P)}
+F§kw1Up N031 Pf1 V_PNearVUSensor {3*pi*Rad1/(16*DistW1_P)}
+B§LeakOutput 0 0 I=9390.14*I(V_VULeak) laplace=s
+V_VULeak N015 0 AC 0
+Re_1 N004 In {Re1}
+Le_1 N006 N004 {Le1}
+Lep_1 N008 N006 {Lep1}
+Rep_1 N006 N008 {Rep1}
+H§BLu2 N009 N012 V_uSensor2 {Bl2}
+H§Bli2 N018 0 V_ISensor2 {BL2}
+L§Mmd_2 N020 N018 {Mmd2}
+Rms_2 N026 N020 {Rms2}
+Cms_2 N029 N026 {Cms2}
+E§SdPd2 N029 N030 Pf2 Pb2 {Sd2}
+V_uSensor2 N030 0 AC 0
+F§Sdu2 Pb2 Pf2 V_uSensor2 {Sd2}
+Ra1_2 Pf2 N023 {Ra12}
+Ra2_2 N023 N024 {Ra22}
+Ca1_2 Pf2 N023 {Ca12}
+L§Ma1_2 Pf2 N032 {Ma12}
+V_WVUSensor2 N024 0 AC 0
+L§Mab_2 Pb2 N014 {Mab2}
+V_WNearVUSensor2 N032 N024 AC 0
+F§kw2Up N032 Pf2 V_PNearVUSensor {3*pi*Rad2/(16*DistW2_P)}
+F§kpUw2 N003 N002 V_WNearVUSensor2 {3*pi*RadP/(16*DistW2_P)}
+F§kw1Uw2 N031 Pf1 V_WNearVUSensor2 {3*pi*Rad1/(16*DistW1_W2)}
+F§kw2Uw1 N032 Pf2 V_WNearVUSensor1 {3*pi*Rad2/(16*DistW1_W2)}
+B§Cone2_Excursion_mm 0 0 I=2.828*1000*I(V_uSensor2) laplace=1/s
+B§Woofer2Output 0 0 I=9390.14*I(V_WVUSensor2) laplace=s
+V_Isensor2 N012 0 AC 0
+.ac oct 40 10 2000
+.param Mms1=17.7e-3
+.param Sd1=134e-4
+.param Fs1=52.3
+.param Qms1=2.79
+.param Qe1=0.5
+.param Re1=5.8
+.param Le1=0.2m
+.param Lep1=0.1m
+.param Rep1=5
+.param Mms2=18e-3
+.param Sd2=134e-4
+.param Fs2=50
+.param Qms2=2.79
+.param Qe2=0.52
+.param Re2=6
+.param Le2=0.2m
+.param Lep2=0.1m
+.param Rep2=5
+.param rad1={sqrt(Sd1/pi)}
+.param Mmd1={Mms1-(16*Sd1*Sd1*1.18/(3*rad1*pi*pi))}
+.param Cms1={1/(pow(Fs1*2*pi,2)*Mms1)}
+.param Rms1={sqrt(Mms1/Cms1)/Qms1}
+.param Bl1={sqrt(Re1*sqrt(Mms1/Cms1)/Qe1)}
+.param Vas1={1.18*pow(345*Sd1,2)*Cms1}
+.param Ma11={8*1.18/(3*pi*pi*rad1)}
+.param Ra11={0.441*1.18*345/Sd1}
+.param Ra21={1.18*345/Sd1}
+.param Ca11={5.94*pow(rad1,3)/(1.18*345*345)}
+* Calculated parameters:
+* Edit the values of the following driver1&2 parameters:\n(Le, Lep and Rep are optional)
+* Outputs to be plotted:\n(Vc impedance is V(in)/I(Re_)\nand group delay is plotted\nat AcousticOutput's plot
+* Edit the box parameters (m3):
+.param Vb=15e-3
+.param Cab={Vb/(1.18*345*345)}
+.param RairLeak={QL/(2*pi*Fb*Cab)}
+.param Ma1p={8*1.18/(3*pi*pi*RadP)}
+.param Map={(1/(pow(2*pi*Fb,2)*Cab))-Ma1p}
+.param Ra2P={1.18*345/(pi*RadP*RadP)}
+.param Ra1P={0.441*1.18*345/(pi*RadP*RadP)}
+.param Ca1P={5.94*pow(RadP,3)/(1.18*345*345)}
+.param Ql=7
+.param RadP=2.5e-2
+.param Mab1=0.65*2.0/(pi*rad1)
+* Use following step to try step changing box params:\n.step param Vb 10e-3 20e-3 4e-3
+* For Mab, use 0.65*2...  to account for some filling used:
+.measure PortLengthINcms Param pow(10, 5*(((Map*pi*radp*radp/1.18)-(0.6132*sqrt(radp*radp)))))
+.param Fb=49
+.param DistW1_P=0.5
+.param DistW2_P=0.5
+.param DistW1_W2=0.5
+* Distance between port and woofer opening, for mutual radiation.\nMake it very high for ignoring this: (as everything else in meters):
+* Printed Values at Output Log:
+.param rad2={sqrt(Sd2/pi)}
+.param Mmd2={Mms2-(16*Sd2*Sd2*1.18/(3*rad2*pi*pi))}
+.param Cms2={1/(pow(Fs2*2*pi,2)*Mms2)}
+.param Rms2={sqrt(Mms2/Cms2)/Qms2}
+.param Bl2={sqrt(Re2*sqrt(Mms2/Cms2)/Qe2)}
+.param Vas2={1.18*pow(345*Sd2,2)*Cms2}
+.param Ma12={8*1.18/(3*pi*pi*rad2)}
+.param Ra12={0.441*1.18*345/Sd2}
+.param Ra22={1.18*345/Sd2}
+.param Ca12={5.94*pow(rad2,3)/(1.18*345*345)}
+* For Mab, use 0.65*2...  to account for some filling used:
+.param Mab2=0.65*2.0/(pi*rad2)
+.backanno
+.end
