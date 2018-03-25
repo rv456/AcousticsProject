@@ -1,16 +1,33 @@
 * C:\users\harvey\My Documents\Documents\UNI\5th_year\Acoustics\AcousticsProject\Simulation\Initial\FreeSpace.asc
-L1 N004 N003 {Le_w}
-R1 N003 Z_woofer {Re_w}
+L1 N008 N007 {Le_w}
+R1 N007 Z_woofer {Re_w}
 I1 Z_woofer 0 AC 1
-C1 N004 0 {C_mes_w}
-R2 N004 0 {R_es_w}
-L2 N004 0 {L_ces_w}
+C1 N008 0 {C_mes_w}
+R2 N008 0 {R_es_w}
+L2 N008 0 {L_ces_w}
 L3 N002 N001 {Le_t}
 R3 N001 Z_tweeter {Re_t}
-I2 Z_tweeter 0 AC 2
+I2 Z_tweeter 0 AC 1
 C2 N002 0 {C_mes_t}
 R4 N002 0 {R_es_t}
 L4 N002 0 {L_ces_t}
+L5 N010 N009 {Le_w}
+R5 N009 Z_wZobel {Re_w}
+C3 N010 0 {C_mes_w}
+R6 N010 0 {R_es_w}
+L6 N010 0 {L_ces_w}
+R7 Z_wZobel N011 {R_z}
+C4 N011 0 {C_z}
+I3 Z_wZobel 0 AC 1
+L7 N004 N003 {Le_t}
+R8 N003 Z_tNotch {Re_t}
+C5 N004 0 {C_mes_t}
+R9 N004 0 {R_es_t}
+L8 N004 0 {L_ces_t}
+R10 Z_tNotch N005 {R_n}
+L9 N006 N005 {L_n}
+C6 N006 0 {C_n}
+I4 Z_tNotch 0 AC 1
 .ac dec 100 20 20000
 .param Re_w=5.13 Le_w=0.84m
 .param C_mes_w=0.000265923 L_ces_w=0.0239995549 R_es_w=63.65
@@ -18,5 +35,7 @@ L4 N002 0 {L_ces_t}
 .param C_mes_t=0.000081939 L_ces_t=0.0002803955 R_es_t=12.9305630027
 * Tweeter
 * Woofer
+.param R_z=Re_w C_z=3.1918653032842E-05
+.param R_n=Re_t L_n=0.0007121913 C_n=0.00003226
 .backanno
 .end
